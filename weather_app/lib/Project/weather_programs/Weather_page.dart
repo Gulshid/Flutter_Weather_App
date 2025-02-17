@@ -36,7 +36,7 @@ class _Weather_appState extends State<Weather_app> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.teal,
+      backgroundColor: Colors.white,
       body: _buildUI());
   }
 
