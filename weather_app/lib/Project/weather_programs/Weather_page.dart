@@ -1,9 +1,13 @@
+// ignore_for_file: unnecessary_string_interpolations, non_constant_identifier_names
+
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'package:intl/intl.dart';
 import 'package:weather/weather.dart';
 import 'package:weather_app/Project/Weather_Service/Weather_service.dart';
-
+import 'package:flutter_spinkit/flutter_spinkit.dart';
+// ignore: camel_case_types
 class Weather_app extends StatefulWidget {
   const Weather_app({super.key});
 
@@ -17,10 +21,13 @@ class _Weather_appState extends State<Weather_app> {
   Weather? _weather;
 
   @override
+
+  
   void initState() {
     super.initState();
     _wf.currentWeatherByCityName('Peshawar').then((w) {
       setState(() {
+        
         _weather = w;
       });
     });
@@ -28,12 +35,20 @@ class _Weather_appState extends State<Weather_app> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(body: _buildUI());
+    return Scaffold(
+      backgroundColor: Colors.teal,
+      body: _buildUI());
   }
 
   Widget _buildUI() {
     if (_weather == null) {
-      return const Center(child: CircularProgressIndicator());
+      return Center(child: Column(
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: [
+          Text('Weather App',style: GoogleFonts.agbalumo(fontSize:20.sp ,color: Colors.black)),
+          const SpinKitFadingCircle(color: Colors.blue,size: 50,),
+        ],
+      ));
     } else {
       return SizedBox(
         width: MediaQuery.sizeOf(context).width,
@@ -93,7 +108,7 @@ class _Weather_appState extends State<Weather_app> {
             ),
             SizedBox(width: 5.w),
             Text(
-              ("${DateFormat("d.m.y").format(now)}"),
+              ("${DateFormat("dd.mm.yy").format(now)}"),
               style: TextStyle(fontSize: 20.sp),
             ),
           ],
@@ -193,5 +208,3 @@ class _Weather_appState extends State<Weather_app> {
     );
 }
 }
-
-
